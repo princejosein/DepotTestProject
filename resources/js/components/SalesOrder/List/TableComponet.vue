@@ -5,7 +5,7 @@
         <td>{{data.Sales}}</td>
         <td>{{data.Amount}}</td>
         <td>{{data.Channel}}</td>
-        <td class="text-center"><router-link :to="{ name: 'details', params: { id: data.REF }}"><button class="btn btn-primary">Details</button></router-link></td>
+        <td class="text-center"><router-link :to="{ name: 'details', params: { id: data.REF }}"><button class="btn btn-custom">Details</button></router-link></td>
     </tr>
 </template>
 

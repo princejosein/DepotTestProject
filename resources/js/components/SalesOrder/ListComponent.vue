@@ -21,22 +21,17 @@
                 ></table-component>
             </tbody>
         </table>
-        <nav>
-            <ul class="pagination pagination-md">
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">1</a></li>
-                <li class="page-item active" aria-current="page">
-                    <span class="page-link">2</span>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+        <b-row v-if="totalItems>0">
+            <b-col md="6" class="my-1">
+                <b-pagination
+                @change="onPageChanged"
+                :total-rows="totalItems"
+                :per-page="perPage"
+                v-model="currentPage"
+                class="my-0"
+                />
+            </b-col>
+        </b-row>
       </div>
   </div>
 </template>
@@ -49,7 +44,10 @@ export default {
     components:{TableComponent, ListPaginationComponent},
     data(){
         return {
-            solists:{}
+            solists:{},
+            totalItems:0,
+            perPage:10,
+            currentPage:1
         }
     },
     created(){
@@ -62,11 +60,16 @@ export default {
             try {
                 const response = await axios.get(url);
                 this.solists = response.data.data;
+                this.totalItems = response.data.total;
+                this.perPage = response.data.per_page;
             } catch (err) {
                 console.error(err.data.data);
             }
+        },
+        onPageChanged(page) {
+            this.getSalesOrders(page)
         }
-    }
+    },
 }
 </script>
 

@@ -27,8 +27,10 @@ Vue.component('app-home', require('./components/AppHome.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 import router from "./router/router";
+import BootstrapVue from "./plugins/bootstrap-vue";
 
 const app = new Vue({
-    router
+    router,
+    BootstrapVue
 }).$mount("#app");
 
