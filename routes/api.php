@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/salesorders', "SalesOrderController@index");
+Route::get('/salesorder/{salesOrderId}', "SalesOrderController@show");

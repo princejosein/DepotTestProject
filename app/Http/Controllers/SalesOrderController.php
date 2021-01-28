@@ -48,4 +48,23 @@ class SalesOrderController extends Controller
 
         return $result;
     }
+
+    /**
+     * Get SalesOrder details.
+     *
+     * @param  String  $salesOrderId
+     * @return \Illuminate\Http\Response
+     */
+    public function show(string $salesOrderId)
+    {
+        //Calling external API
+        $response = Http::withOptions(['verify' => false,])->get($this->baseUrl . "controllers/api/picking/osodetail.php?ref=" . $salesOrderId);
+
+        //Check the response status, If failed return bool false
+        if ($response->failed()) {
+            return false;
+        }
+
+        return $response->json();
+    }
 }
