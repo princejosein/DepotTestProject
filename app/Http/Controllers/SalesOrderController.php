@@ -41,8 +41,8 @@ class SalesOrderController extends Controller
         $page = isset($request->page) ? $request->page : 1;
 
         $startingPoint = ($page * $this->itemPerPage) - $this->itemPerPage;
-        $responseArray = array_slice($response->json(), $startingPoint, $this->itemPerPage, true);
-
+        $responseArray = array_slice($response->json(), $startingPoint, $this->itemPerPage, false);
+        
         //Create a LengthAwarePaginator instance
         $result = new LengthAwarePaginator($responseArray, count($response->json()), $this->itemPerPage, $page);
 
